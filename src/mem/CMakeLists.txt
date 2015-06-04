@@ -1,0 +1,6 @@
+file( GLOB LIBMEM_SOURCES *.c )
+file( GLOB LIBMEM_HEADERS *.h )
+add_library( mem SHARED ${LIBMEM_SOURCES} )
+set_target_properties( mem PROPERTIES VERSION ${LIBMEM_VERSION} SOVERSION ${LIBMEM_ABI_VERSION} )
+install( TARGETS mem LIBRARY DESTINATION lib )
+install( FILES ${LIBMEM_HEADERS} DESTINATION include/mem )
