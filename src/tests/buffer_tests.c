@@ -4,17 +4,17 @@
 #include "../mem/internal/unused.h"
 #include "testing.h"
 
-static void _ensure_buffer_new_returns_null_when_given_null_allocator( )
+static void _ensure_buffer_new_returns_null_when_given_null_allocator( void )
 {
 	TEST_REQUIRE( buffer_new( 0 ) == 0 );
 }
 
-static void _ensure_buffer_new_returns_null_when_allocation_fails( )
+static void _ensure_buffer_new_returns_null_when_allocation_fails( void )
 {
 	TEST_REQUIRE( buffer_new( allocator_always_fail( ) ) == 0 );
 }
 
-static void _ensure_buffer_new_initialises_buffer_with_zero_capacity( )
+static void _ensure_buffer_new_initialises_buffer_with_zero_capacity( void )
 {
 	buffer_t * buffer = buffer_new( allocator_default( ) );
 	TEST_REQUIRE( buffer );
@@ -22,7 +22,7 @@ static void _ensure_buffer_new_initialises_buffer_with_zero_capacity( )
 	buffer_delete( buffer );
 }
 
-static void _ensure_buffer_new_initialises_buffer_with_zero_data_length( )
+static void _ensure_buffer_new_initialises_buffer_with_zero_data_length( void )
 {
 	buffer_t * buffer = buffer_new( allocator_default( ) );
 	TEST_REQUIRE( buffer );
@@ -30,12 +30,12 @@ static void _ensure_buffer_new_initialises_buffer_with_zero_data_length( )
 	buffer_delete( buffer );
 }
 
-static void _ensure_buffer_delete_copes_with_null_buffer( )
+static void _ensure_buffer_delete_copes_with_null_buffer( void )
 {
 	buffer_delete( 0 );
 }
 
-static void _ensure_buffer_delete_copes_with_cleaned_up_buffer( )
+static void _ensure_buffer_delete_copes_with_cleaned_up_buffer( void )
 {
 	buffer_t * buffer;
 	allocator_counted_t allocator;
@@ -46,7 +46,7 @@ static void _ensure_buffer_delete_copes_with_cleaned_up_buffer( )
 	TEST_REQUIRE( allocator_counted_get_current_count( &allocator ) == 0 );
 }
 
-static void _ensure_buffer_delete_releases_all_memory_consumed_by_legitimate_buffer( )
+static void _ensure_buffer_delete_releases_all_memory_consumed_by_legitimate_buffer( void )
 {
 	int data = 123;
 	buffer_t * buffer;
@@ -62,7 +62,7 @@ static void _ensure_buffer_delete_releases_all_memory_consumed_by_legitimate_buf
 	TEST_REQUIRE( allocator_counted_get_current_count( &allocator ) == 0 );
 }
 
-static void _ensure_buffer_init_initialises_buffer_with_zero_capacity( )
+static void _ensure_buffer_init_initialises_buffer_with_zero_capacity( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -70,7 +70,7 @@ static void _ensure_buffer_init_initialises_buffer_with_zero_capacity( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_init_initialises_buffer_with_zero_data_length( )
+static void _ensure_buffer_init_initialises_buffer_with_zero_data_length( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -78,29 +78,29 @@ static void _ensure_buffer_init_initialises_buffer_with_zero_data_length( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_init_copes_with_null_buffer( )
+static void _ensure_buffer_init_copes_with_null_buffer( void )
 {
 	buffer_init( 0, allocator_default( ) );
 }
 
-static void _ensure_buffer_init_copes_with_null_allocator( )
+static void _ensure_buffer_init_copes_with_null_allocator( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, 0 );
 }
 
-static void _ensure_buffer_init_copes_with_failed_allocation( )
+static void _ensure_buffer_init_copes_with_failed_allocation( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_always_fail( ) );
 }
 
-static void _ensure_buffer_cleanup_copes_with_null_buffer( )
+static void _ensure_buffer_cleanup_copes_with_null_buffer( void )
 {
 	buffer_cleanup( 0 );
 }
 
-static void _ensure_buffer_cleanup_copes_with_cleaned_up_buffer( )
+static void _ensure_buffer_cleanup_copes_with_cleaned_up_buffer( void )
 {
 	int data = 123;
 	buffer_t buffer;
@@ -110,7 +110,7 @@ static void _ensure_buffer_cleanup_copes_with_cleaned_up_buffer( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_cleanup_releases_all_memory_consumed_by_legitimate_buffer( )
+static void _ensure_buffer_cleanup_releases_all_memory_consumed_by_legitimate_buffer( void )
 {
 	allocator_counted_t allocator;
 	buffer_t buffer;
@@ -126,7 +126,7 @@ static void _ensure_buffer_cleanup_releases_all_memory_consumed_by_legitimate_bu
 	TEST_REQUIRE( allocator_counted_get_current_count( &allocator ) == 0 );
 }
 
-static void _ensure_buffer_grow_increases_capacity_by_given_non_zero_amount( )
+static void _ensure_buffer_grow_increases_capacity_by_given_non_zero_amount( void )
 {
 	allocator_counted_t allocator;
 	buffer_t buffer;
@@ -138,7 +138,7 @@ static void _ensure_buffer_grow_increases_capacity_by_given_non_zero_amount( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_grow_does_not_reallocate_when_given_zero_amount( )
+static void _ensure_buffer_grow_does_not_reallocate_when_given_zero_amount( void )
 {
 	allocator_counted_t allocator;
 	buffer_t buffer;
@@ -152,7 +152,7 @@ static void _ensure_buffer_grow_does_not_reallocate_when_given_zero_amount( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_grow_returns_zero_when_given_length_of_zero_on_empty_buffer( )
+static void _ensure_buffer_grow_returns_zero_when_given_length_of_zero_on_empty_buffer( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -160,7 +160,7 @@ static void _ensure_buffer_grow_returns_zero_when_given_length_of_zero_on_empty_
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_grow_returns_current_capacity_when_given_length_of_zero_on_nonempty_buffer( )
+static void _ensure_buffer_grow_returns_current_capacity_when_given_length_of_zero_on_nonempty_buffer( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -169,7 +169,7 @@ static void _ensure_buffer_grow_returns_current_capacity_when_given_length_of_ze
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_grow_returns_correct_total_capacity_when_growing_empty_buffer( )
+static void _ensure_buffer_grow_returns_correct_total_capacity_when_growing_empty_buffer( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -177,7 +177,7 @@ static void _ensure_buffer_grow_returns_correct_total_capacity_when_growing_empt
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_grow_returns_correct_total_capacity_when_growing_non_empty_buffer( )
+static void _ensure_buffer_grow_returns_correct_total_capacity_when_growing_non_empty_buffer( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -186,12 +186,12 @@ static void _ensure_buffer_grow_returns_correct_total_capacity_when_growing_non_
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_grow_copes_with_null_buffer( )
+static void _ensure_buffer_grow_copes_with_null_buffer( void )
 {
 	TEST_REQUIRE( buffer_grow( 0, 256 ) == 0 );
 }
 
-static void _ensure_buffer_grow_copes_with_cleaned_up_buffer( )
+static void _ensure_buffer_grow_copes_with_cleaned_up_buffer( void )
 {
 	allocator_counted_t allocator;
 	buffer_t buffer;
@@ -205,7 +205,7 @@ static void _ensure_buffer_grow_copes_with_cleaned_up_buffer( )
 	TEST_REQUIRE( allocator_counted_get_current_count( &allocator ) == 0 );
 }
 
-static void _ensure_buffer_data_length_returns_exact_number_of_bytes_written_to_buffer( )
+static void _ensure_buffer_data_length_returns_exact_number_of_bytes_written_to_buffer( void )
 {
 	int data = 123;
 	buffer_t buffer;
@@ -217,12 +217,12 @@ static void _ensure_buffer_data_length_returns_exact_number_of_bytes_written_to_
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_data_length_copes_with_null_buffer( )
+static void _ensure_buffer_data_length_copes_with_null_buffer( void )
 {
 	TEST_REQUIRE( buffer_data_length( 0 ) == 0 );
 }
 
-static void _ensure_buffer_data_length_copes_with_cleaned_up_buffer( )
+static void _ensure_buffer_data_length_copes_with_cleaned_up_buffer( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -231,7 +231,7 @@ static void _ensure_buffer_data_length_copes_with_cleaned_up_buffer( )
 	TEST_REQUIRE( buffer_data_length( &buffer ) == 0 );
 }
 
-static void _ensure_buffer_data_pointer_returns_null_for_empty_buffer( )
+static void _ensure_buffer_data_pointer_returns_null_for_empty_buffer( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -239,12 +239,12 @@ static void _ensure_buffer_data_pointer_returns_null_for_empty_buffer( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_data_pointer_copes_with_null_buffer( )
+static void _ensure_buffer_data_pointer_copes_with_null_buffer( void )
 {
 	TEST_REQUIRE( buffer_data_pointer( 0 ) == 0 );
 }
 
-static void _ensure_buffer_data_pointer_copes_with_cleaned_up_buffer( )
+static void _ensure_buffer_data_pointer_copes_with_cleaned_up_buffer( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -253,7 +253,7 @@ static void _ensure_buffer_data_pointer_copes_with_cleaned_up_buffer( )
 	TEST_REQUIRE( buffer_data_pointer( &buffer ) == 0 );
 }
 
-static void _ensure_buffer_rewind_reuses_existing_buffer_capacity( )
+static void _ensure_buffer_rewind_reuses_existing_buffer_capacity( void )
 {
 	int data1 = 123, data2 = 456;
 	allocator_counted_t allocator;
@@ -276,7 +276,7 @@ static void _ensure_buffer_rewind_reuses_existing_buffer_capacity( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_rewind_copes_with_empty_buffer( )
+static void _ensure_buffer_rewind_copes_with_empty_buffer( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -284,12 +284,12 @@ static void _ensure_buffer_rewind_copes_with_empty_buffer( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_rewind_copes_with_null_buffer( )
+static void _ensure_buffer_rewind_copes_with_null_buffer( void )
 {
 	buffer_rewind( 0 );
 }
 
-static void _ensure_buffer_rewind_copes_with_cleaned_up_buffer( )
+static void _ensure_buffer_rewind_copes_with_cleaned_up_buffer( void )
 {
 	int data = 123;
 	buffer_t buffer;
@@ -299,7 +299,7 @@ static void _ensure_buffer_rewind_copes_with_cleaned_up_buffer( )
 	buffer_rewind( &buffer );
 }
 
-static void _ensure_buffer_append_copies_given_data_into_buffer( )
+static void _ensure_buffer_append_copies_given_data_into_buffer( void )
 {
 	int data1 = 123, data2 = 456;
 	buffer_t buffer;
@@ -311,13 +311,13 @@ static void _ensure_buffer_append_copies_given_data_into_buffer( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_append_copes_with_null_buffer( )
+static void _ensure_buffer_append_copes_with_null_buffer( void )
 {
 	int data = 123;
 	TEST_REQUIRE( buffer_append( 0, sizeof( data ), &data ) == 0 );
 }
 
-static void _ensure_buffer_append_copes_with_cleaned_up_buffer( )
+static void _ensure_buffer_append_copes_with_cleaned_up_buffer( void )
 {
 	int data = 123;
 	allocator_counted_t allocator;
@@ -332,7 +332,7 @@ static void _ensure_buffer_append_copes_with_cleaned_up_buffer( )
 	TEST_REQUIRE( allocator_counted_get_current_count( &allocator ) == 0 );
 }
 
-static void _ensure_buffer_append_does_not_mutate_buffer_when_given_zero_data_length( )
+static void _ensure_buffer_append_does_not_mutate_buffer_when_given_zero_data_length( void )
 {
 	int data = 123;
 	buffer_t buffer, snapshot;
@@ -344,7 +344,7 @@ static void _ensure_buffer_append_does_not_mutate_buffer_when_given_zero_data_le
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_append_does_not_mutate_buffer_when_given_null_data_pointer( )
+static void _ensure_buffer_append_does_not_mutate_buffer_when_given_null_data_pointer( void )
 {
 	int data = 123;
 	buffer_t buffer, snapshot;
@@ -356,7 +356,7 @@ static void _ensure_buffer_append_does_not_mutate_buffer_when_given_null_data_po
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_append_returns_number_of_bytes_appended_to_buffer( )
+static void _ensure_buffer_append_returns_number_of_bytes_appended_to_buffer( void )
 {
 	int data[] = { 1, 2, 3, 4, 5 };
 	buffer_t buffer;
@@ -365,12 +365,12 @@ static void _ensure_buffer_append_returns_number_of_bytes_appended_to_buffer( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_reserve_copes_with_null_buffer( )
+static void _ensure_buffer_reserve_copes_with_null_buffer( void )
 {
 	TEST_REQUIRE( buffer_reserve( 0, 1024 ) == 0 );
 }
 
-static void _ensure_buffer_reserve_copes_with_cleaned_up_buffer( )
+static void _ensure_buffer_reserve_copes_with_cleaned_up_buffer( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );
@@ -379,7 +379,7 @@ static void _ensure_buffer_reserve_copes_with_cleaned_up_buffer( )
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_reserve_does_not_mutate_buffer_when_given_zero_data_length( )
+static void _ensure_buffer_reserve_does_not_mutate_buffer_when_given_zero_data_length( void )
 {
 	buffer_t buffer, snapshot;
 	buffer_init( &buffer, allocator_default( ) );
@@ -390,7 +390,7 @@ static void _ensure_buffer_reserve_does_not_mutate_buffer_when_given_zero_data_l
 	buffer_cleanup( &buffer );
 }
 
-static void _ensure_buffer_reserve_returns_non_null_pointer_on_success( )
+static void _ensure_buffer_reserve_returns_non_null_pointer_on_success( void )
 {
 	buffer_t buffer;
 	buffer_init( &buffer, allocator_default( ) );

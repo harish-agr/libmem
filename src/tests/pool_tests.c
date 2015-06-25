@@ -244,5 +244,6 @@ int main( int argc, char * argv[] )
 	_ensure_pool_is_empty_gracefully_handles_cleaned_up_pool( );
 	_ensure_pool_is_empty_returns_non_zero_on_empty_legitimate_pool( );
 	_ensure_pool_is_empty_returns_zero_on_non_empty_legitimate_pool( );
+	return 0;
 }
 

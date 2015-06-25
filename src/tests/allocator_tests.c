@@ -38,19 +38,19 @@ static void _mock_allocator_init( _mock_allocator_t * alloc )
 }
 
 
-static void _ensure_allocator_alloc_returns_null_when_passed_null_allocator( )
+static void _ensure_allocator_alloc_returns_null_when_passed_null_allocator( void )
 {
 	TEST_REQUIRE( allocator_alloc( 1024, 0 ) == 0 );
 }
 
 
-static void _ensure_allocator_alloc_returns_null_when_allocator_fails( )
+static void _ensure_allocator_alloc_returns_null_when_allocator_fails( void )
 {
 	TEST_REQUIRE( allocator_alloc( 1024, allocator_always_fail( ) ) == 0 );
 }
 
 
-static void _ensure_allocator_alloc_calls_alloc_fn( )
+static void _ensure_allocator_alloc_calls_alloc_fn( void )
 {
 	_mock_allocator_t alloc;
 	_mock_allocator_init( &alloc );
@@ -60,27 +60,27 @@ static void _ensure_allocator_alloc_calls_alloc_fn( )
 }
 
 
-static void _ensure_allocator_alloc_copes_with_null_alloc_fn( )
+static void _ensure_allocator_alloc_copes_with_null_alloc_fn( void )
 {
 	allocator_t alloc = { 0, 0 };
 	TEST_REQUIRE( allocator_alloc( 1024, &alloc ) == 0 );
 }
 
 
-static void _ensure_allocator_free_copes_with_null_address( )
+static void _ensure_allocator_free_copes_with_null_address( void )
 {
 	allocator_free( 0, allocator_always_fail( ) );
 }
 
 
-static void _ensure_allocator_free_copes_with_null_allocator( )
+static void _ensure_allocator_free_copes_with_null_allocator( void )
 {
 	int x = 0;
 	allocator_free( &x, 0 );
 }
 
 
-static void _ensure_allocator_free_calls_free_fn( )
+static void _ensure_allocator_free_calls_free_fn( void )
 {
 	_mock_allocator_t alloc;
 	_mock_allocator_init( &alloc );
@@ -90,7 +90,7 @@ static void _ensure_allocator_free_calls_free_fn( )
 }
 
 
-static void _ensure_allocator_free_copes_with_null_free_fn( )
+static void _ensure_allocator_free_copes_with_null_free_fn( void )
 {
 	int x = 0;
 	allocator_t alloc = { 0, 0 };
@@ -98,13 +98,13 @@ static void _ensure_allocator_free_copes_with_null_free_fn( )
 }
 
 
-static void _ensure_allocator_default_returns_an_allocator( )
+static void _ensure_allocator_default_returns_an_allocator( void )
 {
 	TEST_REQUIRE( allocator_default( ) != 0 );
 }
 
 
-static void _ensure_allocator_default_can_allocate_and_release_memory( )
+static void _ensure_allocator_default_can_allocate_and_release_memory( void )
 {
 	void * mem = allocator_alloc( 1024, allocator_default( ) );
 	TEST_REQUIRE( mem != 0 );
@@ -112,32 +112,32 @@ static void _ensure_allocator_default_can_allocate_and_release_memory( )
 }
 
 
-static void _ensure_allocator_default_returns_null_for_zero_length_allocation( )
+static void _ensure_allocator_default_returns_null_for_zero_length_allocation( void )
 {
 	void * mem = allocator_alloc( 0, allocator_default( ) );
 	TEST_REQUIRE( mem == 0 );
 }
 
 
-static void _ensure_allocator_default_free_copes_with_null_address( )
+static void _ensure_allocator_default_free_copes_with_null_address( void )
 {
 	allocator_free( 0, allocator_default( ) );
 }
 
 
-static void _ensure_allocator_always_fail_returns_an_allocator( )
+static void _ensure_allocator_always_fail_returns_an_allocator( void )
 {
 	TEST_REQUIRE( allocator_always_fail( ) != 0 );
 }
 
 
-static void _ensure_allocator_always_fail_returns_null_memory( )
+static void _ensure_allocator_always_fail_returns_null_memory( void )
 {
 	TEST_REQUIRE( allocator_alloc( 1024, allocator_always_fail( ) ) == 0 );
 }
 
 
-static void _ensure_allocator_always_fail_free_copes_with_null_address( )
+static void _ensure_allocator_always_fail_free_copes_with_null_address( void )
 {
 	allocator_free( 0, allocator_always_fail( ) );
 }

@@ -76,7 +76,7 @@ static void _allocator_default_free( void * address, allocator_t * allocator )
  * Returns a pointer to the default allocator, which calls through to stdlib malloc / free
  *
  */
-allocator_t * allocator_default( )
+allocator_t * allocator_default( void )
 {
 	static allocator_t result = {
 		&_allocator_default_alloc,
@@ -120,7 +120,7 @@ static void _allocator_always_fail_free( void * address, allocator_t * allocator
  * Returns a pointer to an allocator that always returns NULL - useful for testing
  *
  */
-allocator_t * allocator_always_fail( )
+allocator_t * allocator_always_fail( void )
 {
 	static allocator_t result = {
 		&_allocator_always_fail_alloc,
@@ -466,7 +466,7 @@ static void * _allocator_traced_alloc(
 
 	traced = ( allocator_traced_t * ) allocator;
 	result = allocator_alloc( length, traced->parent );
-	fprintf( traced->fd, "Allocated %zu bytes in block %p\n", length, result );
+	fprintf( traced->fd, "Allocated %lu bytes in block %p\n", ( long unsigned ) length, result );
 	return result;
 }
 

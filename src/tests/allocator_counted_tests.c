@@ -3,20 +3,20 @@
 #include "testing.h"
 
 
-static void _ensure_allocator_counted_init_copes_with_null_allocator( )
+static void _ensure_allocator_counted_init_copes_with_null_allocator( void )
 {
 	allocator_counted_init( 0, allocator_default( ) );
 }
 
 
-static void _ensure_allocator_counted_init_copes_with_null_parent_allocator( )
+static void _ensure_allocator_counted_init_copes_with_null_parent_allocator( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init( &alloc, 0 );
 }
 
 
-static void _ensure_allocator_counted_init_sets_correct_parent_allocator( )
+static void _ensure_allocator_counted_init_sets_correct_parent_allocator( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init( &alloc, allocator_default( ) );
@@ -24,7 +24,7 @@ static void _ensure_allocator_counted_init_sets_correct_parent_allocator( )
 }
 
 
-static void _ensure_allocator_counted_init_sets_allocation_functions( )
+static void _ensure_allocator_counted_init_sets_allocation_functions( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init( &alloc, allocator_default( ) );
@@ -33,13 +33,13 @@ static void _ensure_allocator_counted_init_sets_allocation_functions( )
 }
 
 
-static void _ensure_allocator_counted_init_default_copes_with_null_allocator( )
+static void _ensure_allocator_counted_init_default_copes_with_null_allocator( void )
 {
 	allocator_counted_init_default( 0 );
 }
 
 
-static void _ensure_allocator_counted_init_default_sets_correct_parent_allocator( )
+static void _ensure_allocator_counted_init_default_sets_correct_parent_allocator( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init_default( &alloc );
@@ -47,7 +47,7 @@ static void _ensure_allocator_counted_init_default_sets_correct_parent_allocator
 }
 
 
-static void _ensure_allocator_counted_init_default_sets_allocation_functions( )
+static void _ensure_allocator_counted_init_default_sets_allocation_functions( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init_default( &alloc );
@@ -56,7 +56,7 @@ static void _ensure_allocator_counted_init_default_sets_allocation_functions( )
 }
 
 
-static void _ensure_allocator_counted_get_returns_internal_allocator( )
+static void _ensure_allocator_counted_get_returns_internal_allocator( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init_default( &alloc );
@@ -64,7 +64,7 @@ static void _ensure_allocator_counted_get_returns_internal_allocator( )
 }
 
 
-static void _ensure_allocator_counted_alloc_returns_null_for_empty_allocation( )
+static void _ensure_allocator_counted_alloc_returns_null_for_empty_allocation( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init_default( &alloc );
@@ -72,7 +72,7 @@ static void _ensure_allocator_counted_alloc_returns_null_for_empty_allocation( )
 }
 
 
-static void _ensure_allocator_counted_alloc_returns_null_when_parent_allocator_null( )
+static void _ensure_allocator_counted_alloc_returns_null_when_parent_allocator_null( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init( &alloc, 0 );
@@ -80,7 +80,7 @@ static void _ensure_allocator_counted_alloc_returns_null_when_parent_allocator_n
 }
 
 
-static void _ensure_allocator_counted_alloc_returns_null_when_parent_allocator_fails( )
+static void _ensure_allocator_counted_alloc_returns_null_when_parent_allocator_fails( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init( &alloc, allocator_always_fail() );
@@ -88,7 +88,7 @@ static void _ensure_allocator_counted_alloc_returns_null_when_parent_allocator_f
 }
 
 
-static void _ensure_allocator_counted_alloc_updates_count_when_allocation_succeeds( )
+static void _ensure_allocator_counted_alloc_updates_count_when_allocation_succeeds( void )
 {
 	void * a, * b;
 
@@ -108,7 +108,7 @@ static void _ensure_allocator_counted_alloc_updates_count_when_allocation_succee
 }
 
 
-static void _ensure_allocator_counted_alloc_doesnt_update_count_when_allocation_failed( )
+static void _ensure_allocator_counted_alloc_doesnt_update_count_when_allocation_failed( void )
 {
 	void * a;
 	allocator_counted_t alloc;
@@ -120,7 +120,7 @@ static void _ensure_allocator_counted_alloc_doesnt_update_count_when_allocation_
 }
 
 
-static void _ensure_allocator_counted_alloc_maintains_correct_peak_count( )
+static void _ensure_allocator_counted_alloc_maintains_correct_peak_count( void )
 {
 	void * a, * b;
 	allocator_counted_t alloc;
@@ -139,7 +139,7 @@ static void _ensure_allocator_counted_alloc_maintains_correct_peak_count( )
 }
 
 
-static void _ensure_allocator_counted_free_copes_with_null_parent_allocator( )
+static void _ensure_allocator_counted_free_copes_with_null_parent_allocator( void )
 {
 	int data = 0;
 	allocator_counted_t alloc;
@@ -148,7 +148,7 @@ static void _ensure_allocator_counted_free_copes_with_null_parent_allocator( )
 }
 
 
-static void _ensure_allocator_counted_free_copes_with_null_address( )
+static void _ensure_allocator_counted_free_copes_with_null_address( void )
 {
 	allocator_counted_t alloc;
 	allocator_counted_init_default( &alloc );

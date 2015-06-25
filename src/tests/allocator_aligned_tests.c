@@ -6,7 +6,7 @@
 #include "testing.h"
 
 
-static void _ensure_allocator_aligned_init_sets_correct_parent_allocator( )
+static void _ensure_allocator_aligned_init_sets_correct_parent_allocator( void )
 {
 	allocator_aligned_t alloc;
 	allocator_t * parent = allocator_default( );
@@ -15,7 +15,7 @@ static void _ensure_allocator_aligned_init_sets_correct_parent_allocator( )
 }
 
 
-static void _ensure_allocator_aligned_init_sets_allocation_functions( )
+static void _ensure_allocator_aligned_init_sets_allocation_functions( void )
 {
 	allocator_aligned_t alloc;
 	allocator_aligned_init( &alloc, allocator_default( ), 8 );
@@ -24,7 +24,7 @@ static void _ensure_allocator_aligned_init_sets_allocation_functions( )
 }
 
 
-static void _ensure_allocator_aligned_init_sets_internal_alignment( )
+static void _ensure_allocator_aligned_init_sets_internal_alignment( void )
 {
 	allocator_aligned_t alloc;
 	allocator_aligned_init( &alloc, allocator_default( ), 8 );
@@ -32,7 +32,7 @@ static void _ensure_allocator_aligned_init_sets_internal_alignment( )
 }
 
 
-static void _ensure_allocator_aligned_init_default_sets_default_allocator( )
+static void _ensure_allocator_aligned_init_default_sets_default_allocator( void )
 {
 	allocator_aligned_t alloc;
 	allocator_aligned_init_default( &alloc, 8 );
@@ -40,7 +40,7 @@ static void _ensure_allocator_aligned_init_default_sets_default_allocator( )
 }
 
 
-static void _ensure_allocator_aligned_init_default_sets_allocation_functions( )
+static void _ensure_allocator_aligned_init_default_sets_allocation_functions( void )
 {
 	allocator_aligned_t alloc;
 	allocator_aligned_init_default( &alloc, 8 );
@@ -49,7 +49,7 @@ static void _ensure_allocator_aligned_init_default_sets_allocation_functions( )
 }
 
 
-static void _ensure_allocator_aligned_init_default_sets_internal_alignment( )
+static void _ensure_allocator_aligned_init_default_sets_internal_alignment( void )
 {
 	allocator_aligned_t alloc;
 	allocator_aligned_init_default( &alloc, 8 );
@@ -57,7 +57,7 @@ static void _ensure_allocator_aligned_init_default_sets_internal_alignment( )
 }
 
 
-static void _ensure_allocator_aligned_get_returns_internal_allocator( )
+static void _ensure_allocator_aligned_get_returns_internal_allocator( void )
 {
 	allocator_aligned_t alloc;
 	allocator_aligned_init_default( &alloc, 8 );
@@ -65,7 +65,7 @@ static void _ensure_allocator_aligned_get_returns_internal_allocator( )
 }
 
 
-static void _ensure_allocator_aligned_alloc_returns_null_for_empty_allocation( )
+static void _ensure_allocator_aligned_alloc_returns_null_for_empty_allocation( void )
 {
 	allocator_aligned_t alloc;
 	allocator_aligned_init_default( &alloc, 8 );
@@ -73,7 +73,7 @@ static void _ensure_allocator_aligned_alloc_returns_null_for_empty_allocation( )
 }
 
 
-static void _ensure_allocator_aligned_alloc_returns_null_when_parent_allocator_null( )
+static void _ensure_allocator_aligned_alloc_returns_null_when_parent_allocator_null( void )
 {
 	allocator_aligned_t alloc;
 	allocator_aligned_init( &alloc, 0, 8 );
@@ -81,7 +81,7 @@ static void _ensure_allocator_aligned_alloc_returns_null_when_parent_allocator_n
 }
 
 
-static void _ensure_allocator_aligned_alloc_returns_null_when_parent_allocator_fails( )
+static void _ensure_allocator_aligned_alloc_returns_null_when_parent_allocator_fails( void )
 {
 	allocator_aligned_t alloc;
 	allocator_aligned_init( &alloc, allocator_always_fail( ), 8 );
@@ -89,7 +89,7 @@ static void _ensure_allocator_aligned_alloc_returns_null_when_parent_allocator_f
 }
 
 
-static void _ensure_allocator_aligned_alloc_returns_valid_memory_for_nonempty_allocation( )
+static void _ensure_allocator_aligned_alloc_returns_valid_memory_for_nonempty_allocation( void )
 {
 	void * mem;
 	allocator_aligned_t alloc;
@@ -100,7 +100,7 @@ static void _ensure_allocator_aligned_alloc_returns_valid_memory_for_nonempty_al
 }
 
 
-static void _ensure_allocator_aligned_alloc_returns_correctly_aligned_address( )
+static void _ensure_allocator_aligned_alloc_returns_correctly_aligned_address( void )
 {
 	void * mem;
 	allocator_aligned_t alloc;
@@ -111,7 +111,7 @@ static void _ensure_allocator_aligned_alloc_returns_correctly_aligned_address( )
 }
 
 
-static void _ensure_allocator_aligned_free_copes_with_null_parent_allocator( )
+static void _ensure_allocator_aligned_free_copes_with_null_parent_allocator( void )
 {
 	int x = 0;
 	allocator_aligned_t alloc;
@@ -120,7 +120,7 @@ static void _ensure_allocator_aligned_free_copes_with_null_parent_allocator( )
 }
 
 
-static void _ensure_allocator_aligned_copes_with_alignment_value_of_zero( )
+static void _ensure_allocator_aligned_copes_with_alignment_value_of_zero( void )
 {
 	void * mem;
 	allocator_aligned_t alloc;
@@ -131,7 +131,7 @@ static void _ensure_allocator_aligned_copes_with_alignment_value_of_zero( )
 }
 
 
-static void _ensure_allocator_aligned_copes_with_alignment_value_of_one( )
+static void _ensure_allocator_aligned_copes_with_alignment_value_of_one( void )
 {
 	void * mem;
 	allocator_aligned_t alloc;

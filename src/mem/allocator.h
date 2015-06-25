@@ -1,7 +1,7 @@
 #ifndef __MEM_ALLOCATOR_H
 #define __MEM_ALLOCATOR_H
 
-#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 

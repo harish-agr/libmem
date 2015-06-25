@@ -6,7 +6,7 @@
 #include "testing.h"
 
 
-static void ensure_allocator_guarded_init_sets_correct_parent_allocator( )
+static void ensure_allocator_guarded_init_sets_correct_parent_allocator( void )
 {
 	allocator_guarded_t alloc;
 	allocator_t * parent = allocator_default( );
@@ -15,7 +15,7 @@ static void ensure_allocator_guarded_init_sets_correct_parent_allocator( )
 }
 
 
-static void ensure_allocator_guarded_init_sets_allocation_functions( )
+static void ensure_allocator_guarded_init_sets_allocation_functions( void )
 {
 	allocator_guarded_t alloc;
 	allocator_guarded_init( &alloc, allocator_default( ) );
@@ -24,7 +24,7 @@ static void ensure_allocator_guarded_init_sets_allocation_functions( )
 }
 
 
-static void ensure_allocator_guarded_init_default_sets_default_allocator( )
+static void ensure_allocator_guarded_init_default_sets_default_allocator( void )
 {
 	allocator_guarded_t alloc;
 	allocator_guarded_init_default( &alloc );
@@ -32,7 +32,7 @@ static void ensure_allocator_guarded_init_default_sets_default_allocator( )
 }
 
 
-static void ensure_allocator_guarded_init_default_sets_allocation_functions( )
+static void ensure_allocator_guarded_init_default_sets_allocation_functions( void )
 {
 	allocator_guarded_t alloc;
 	allocator_guarded_init_default( &alloc );
@@ -41,7 +41,7 @@ static void ensure_allocator_guarded_init_default_sets_allocation_functions( )
 }
 
 
-static void ensure_allocator_guarded_get_returns_internal_allocator( )
+static void ensure_allocator_guarded_get_returns_internal_allocator( void )
 {
 	allocator_guarded_t alloc;
 	allocator_guarded_init_default( &alloc );
@@ -49,7 +49,7 @@ static void ensure_allocator_guarded_get_returns_internal_allocator( )
 }
 
 
-static void ensure_allocator_guarded_alloc_returns_null_for_empty_allocation( )
+static void ensure_allocator_guarded_alloc_returns_null_for_empty_allocation( void )
 {
 	allocator_guarded_t alloc;
 	allocator_guarded_init_default( &alloc );
@@ -57,7 +57,7 @@ static void ensure_allocator_guarded_alloc_returns_null_for_empty_allocation( )
 }
 
 
-static void ensure_allocator_guarded_alloc_returns_null_when_parent_allocator_null( )
+static void ensure_allocator_guarded_alloc_returns_null_when_parent_allocator_null( void )
 {
 	allocator_guarded_t alloc;
 	allocator_guarded_init( &alloc, 0 );
@@ -65,7 +65,7 @@ static void ensure_allocator_guarded_alloc_returns_null_when_parent_allocator_nu
 }
 
 
-static void ensure_allocator_guarded_alloc_returns_null_when_parent_allocator_fails( )
+static void ensure_allocator_guarded_alloc_returns_null_when_parent_allocator_fails( void )
 {
 	allocator_guarded_t alloc;
 	allocator_guarded_init( &alloc, allocator_always_fail( ) );
@@ -73,7 +73,7 @@ static void ensure_allocator_guarded_alloc_returns_null_when_parent_allocator_fa
 }
 
 
-static void ensure_allocator_guarded_alloc_returns_valid_memory_for_nonempty_allocation( )
+static void ensure_allocator_guarded_alloc_returns_valid_memory_for_nonempty_allocation( void )
 {
 	void * mem;
 	allocator_guarded_t alloc;
@@ -84,7 +84,7 @@ static void ensure_allocator_guarded_alloc_returns_valid_memory_for_nonempty_all
 }
 
 
-static void ensure_allocator_guarded_free_copes_with_null_parent_allocator( )
+static void ensure_allocator_guarded_free_copes_with_null_parent_allocator( void )
 {
 	int x = 0;
 	allocator_guarded_t alloc;
@@ -93,7 +93,7 @@ static void ensure_allocator_guarded_free_copes_with_null_parent_allocator( )
 }
 
 
-static void ensure_allocator_guarded_length_returns_correct_value_for_successful_allocation( )
+static void ensure_allocator_guarded_length_returns_correct_value_for_successful_allocation( void )
 {
 	void * mem;
 	allocator_guarded_t alloc;
@@ -105,7 +105,7 @@ static void ensure_allocator_guarded_length_returns_correct_value_for_successful
 }
 
 
-static void ensure_allocator_guarded_length_returns_zero_when_address_not_guarded( )
+static void ensure_allocator_guarded_length_returns_zero_when_address_not_guarded( void )
 {
 	char buffer[128];
 	memset( buffer, 0, sizeof( buffer ) );
@@ -113,7 +113,7 @@ static void ensure_allocator_guarded_length_returns_zero_when_address_not_guarde
 }
 
 
-static void ensure_allocator_guarded_length_returns_zero_when_start_guard_corrupted( )
+static void ensure_allocator_guarded_length_returns_zero_when_start_guard_corrupted( void )
 {
 	size_t * buffer;
 	size_t old_guard_value;
@@ -135,7 +135,7 @@ static void ensure_allocator_guarded_length_returns_zero_when_start_guard_corrup
 }
 
 
-static void ensure_allocator_guarded_length_returns_zero_when_end_guard_corrupted( )
+static void ensure_allocator_guarded_length_returns_zero_when_end_guard_corrupted( void )
 {
 	size_t * buffer;
 	size_t old_guard_value;
